@@ -1,23 +1,21 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
+import Card from "./components/NotFound";
+import PollCreation from "./components/PollCreation";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div
-      style={{
-        backgroundImage: 'url("src/components/assets/background.png")',
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center center",
-        backgroundAttachment: "fixed",
-        fontFamily: "Product Sans",
-      }}
-      className=""
-    >
-      <Navbar />
-      <Home />
-    </div>
+    <HashRouter>
+   
+    <Routes>
+      <Route path="/" element={<> <Navbar /><Home /></>}/>
+      <Route path="/PollCreation" element={<PollCreation />} />
+      <Route path="*" element={<Card />} />
+    </Routes>
+  
+    </HashRouter>
   );
 }
 

@@ -1,14 +1,14 @@
 import { useState } from "react";
-
+import { To } from "react-router-dom";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="py-10 px-10 flex justify-between items-center relative">
+    <nav className="py-10 px-10 flex justify-between items-center relative z-50">
       {/* Logo or Brand Name */}
-      <div className="text-white font-bold text-3xl md:text-5xl">Pollify</div>
+      <div className="text-white font-bold text-3xl md:text-4xl ">Pollify</div>
 
       {/* Hamburger Icon */}
       <button
@@ -19,10 +19,10 @@ export default function Navbar() {
       </button>
 
       {/* Desktop Menu */}
-      <ul className="hidden md:flex space-x-9 text-white font-bold text-2xl absolute right-10 top-10 transition-opacity duration-300 ease-in-out">
+      <ul className="hidden md:flex space-x-9 text-white font-bold text-xl absolute right-10 top-10 transition-opacity duration-300 ease-in-out">
         <li>
           <a
-            href="#about"
+            href="#PollCreation"
             className="hover:text-gray-400 transition-colors duration-300 ease-in-out"
           >
             About
@@ -30,7 +30,7 @@ export default function Navbar() {
         </li>
         <li>
           <a
-            href="#poll-creation"
+              
             className="hover:text-gray-400 transition-colors duration-300 ease-in-out"
           >
             Poll Creation
@@ -97,7 +97,7 @@ export default function Navbar() {
         </li>
         <li>
           <a
-            href="#poll-creation"
+            href="#PollCreation"
             className="hover:text-gray-400 transition-colors duration-300 ease-in-out"
             onClick={toggleMenu}
           >

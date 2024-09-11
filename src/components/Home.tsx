@@ -1,4 +1,5 @@
 import Button from "./Social";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
       {/* Poll Creation Box */}
       <div className="flex flex-col items-center justify-center md:my-4 mt-3">
         {/* Box Container */}
-        <div className="border-[0.1rem] border-zinc-500 h-54 md:h-52 w-[18rem] md:w-[25rem] rounded-3xl bg-gradient-to-b from-black to-purple-950-900 p-8 text-center shadow-lg shadow-black ">
+        <div className="border-[0.1rem]  h-54 md:h-52 w-[18rem] md:w-[25rem] rounded-3xl bg-black bg-opacity-10  border-zinc-500 backdrop-filter backdrop-blur-sm shadow-xl p-8 text-center  shadow-black ">
           <h2 className="text-white text-2xl md:text-3xl font-bold mb-4">
             Create a Poll
             <br />
@@ -29,9 +30,11 @@ export default function Home() {
             <button className="text-lg text-center font-bold border-2 border-white text-white py-2 px-6 w-[6.5rem] rounded-[5rem] hover:bg-white hover:text-black transition">
               Cast
             </button>
+            <Link to="/PollCreation">
             <button className="text-lg text-center font-bold border-2 border-white text-white py-2 px-6 rounded-[5rem] w-[6.5rem] hover:bg-white hover:text-black transition">
               Create
             </button>
+            </Link>
           </div>
         </div>
       </div>
