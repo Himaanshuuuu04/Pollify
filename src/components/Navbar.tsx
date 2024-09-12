@@ -1,28 +1,31 @@
 import { useState } from "react";
-import { To } from "react-router-dom";
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
+  // Toggle the menu on hamburger click
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
     <nav className="py-10 px-10 flex justify-between items-center relative z-50">
       {/* Logo or Brand Name */}
-      <div className="text-white font-bold text-3xl md:text-4xl ">Pollify</div>
+      <div className="text-white font-bold text-3xl md:text-4xl">Pollify</div>
 
-      {/* Hamburger Icon */}
-      <button
-        className="text-white text-2xl md:hidden transition-transform duration-300 ease-in-out"
-        onClick={toggleMenu}
-      >
-        <span className="material-symbols-outlined">menu</span>
-      </button>
+      {/* Hamburger Icon (Visible on Mobile) */}
+      {!isOpen && (
+        <button
+          className="text-white text-2xl md:hidden transition-transform duration-300 ease-in-out"
+          onClick={toggleMenu}
+        >
+          <span className="material-symbols-outlined">menu</span>
+        </button>
+      )}
 
       {/* Desktop Menu */}
-      <ul className="hidden md:flex space-x-9 text-white font-bold text-xl absolute right-10 top-10 transition-opacity duration-300 ease-in-out">
+      <ul className="hidden md:flex space-x-9 text-white text-xl absolute right-10 top-10 transition-opacity duration-300 ease-in-out">
         <li>
           <a
-            href="#PollCreation"
+            href="#About"
             className="hover:text-gray-400 transition-colors duration-300 ease-in-out"
           >
             About
@@ -30,7 +33,7 @@ export default function Navbar() {
         </li>
         <li>
           <a
-              href="#PollCreation"
+            href="#PollCreation"
             className="hover:text-gray-400 transition-colors duration-300 ease-in-out"
           >
             Poll Creation
@@ -55,7 +58,7 @@ export default function Navbar() {
             <li>
               <a
                 href="#link1"
-                className="block px-4  py-2 hover:bg-zinc-700 transition-colors duration-300 ease-in-out rounded-lg"
+                className="block px-4 py-2 hover:bg-zinc-700 transition-colors duration-300 ease-in-out rounded-lg"
               >
                 Link 1
               </a>
@@ -83,12 +86,23 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <ul
         className={`fixed inset-0 bg-zinc-700 bg-opacity-80 text-white font-bold text-2xl flex flex-col space-y-6 items-center justify-center transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+          isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
         } md:hidden`}
       >
+        {/* Hamburger Icon (Inside Mobile Menu to Close it) */}
+        {isOpen && (
+          <button
+            className="absolute top-8 right-10 text-white text-4xl transition-transform duration-300 ease-in-out"
+            onClick={toggleMenu}
+          >
+            <span className="material-symbols-outlined">close</span>
+          </button>
+        )}
+
+        {/* Menu Links */}
         <li>
           <a
-            href="#about"
+            href="#About"
             className="hover:text-gray-400 transition-colors duration-300 ease-in-out"
             onClick={toggleMenu}
           >
@@ -106,7 +120,7 @@ export default function Navbar() {
         </li>
         <li>
           <a
-            href="#results"
+            href="#Results"
             className="hover:text-gray-400 transition-colors duration-300 ease-in-out"
             onClick={toggleMenu}
           >

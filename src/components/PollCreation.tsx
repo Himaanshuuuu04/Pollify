@@ -81,12 +81,12 @@ export default function PollCreation() {
       console.log("Final Data:", finalData);
 
       
-      navigate("/success"); 
+      navigate("/Success"); 
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center min-h-screen tracking-wide">
       <div className="w-3/4 mx-[2rem] md:mx-[6rem] my-[3rem] md:my-[4rem] max-w-[100vw] p-10 bg-black bg-opacity-10 rounded-[2rem] border-2 border-zinc-800 backdrop-filter backdrop-blur-sm shadow-xl">
         {/* Form Title */}
         <h1 className="text-4xl font-bold text-white mb-8">
