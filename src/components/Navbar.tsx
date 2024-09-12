@@ -30,7 +30,7 @@ export default function Navbar() {
         </li>
         <li>
           <a
-              
+              href="#PollCreation"
             className="hover:text-gray-400 transition-colors duration-300 ease-in-out"
           >
             Poll Creation

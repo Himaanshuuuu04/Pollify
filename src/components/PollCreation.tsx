@@ -1,10 +1,16 @@
 import Pollinput from "./subComponents/Pollinput";
 import Polloption from "./subComponents/Polloption";
+import { useRef } from "react";
 export default function PollCreation(){
+    const childRef = useRef(null);
     const PollVariable=1;
+    const handleClick = () => {
+        if (childRef.current) {
+          console.log("Value from Child:", childRef.current.getValueO());
+        }}
     return(
             <div className="flex justify-center items-center min-h-screen">
-              <div className="w-3/4 mx-[6rem] my-[4rem] max-w-[100vw] p-10 bg-black bg-opacity-10 rounded-[2rem] border-2 border-zinc-800 backdrop-filter backdrop-blur-sm shadow-xl">
+              <div className="w-3/4 mx-[2rem] md:mx-[6rem] my-[3rem] md:my-[4rem] max-w-[100vw] p-10 bg-black bg-opacity-10 rounded-[2rem] border-2 border-zinc-800 backdrop-filter backdrop-blur-sm shadow-xl">
                 {/* Form Title */}
                 <h1 className="text-4xl font-bold text-white mb-8">
                   <span className="">Create a New Poll</span>
@@ -13,13 +19,13 @@ export default function PollCreation(){
                 {/* Input Fields */}
                 <form className="space-y-6">
                 {/* Name */}
-                  <Pollinput pollNumber="Name" placeHolder="Himanshu Singh" type="text"/>
+                  <Pollinput pollText="Name" placeholder="Himanshu Singh" type="text"/>
         
                 {/* Mobile No */}
-                  <Pollinput pollNumber="Mobile No." placeHolder="9818377959" type="number"/>
+                  <Pollinput pollText="Mobile No." placeholder="9818377959" type="number"/>
         
                 {/* Email */}
-                  <Pollinput pollNumber="Email" placeHolder="Himanshu.singh@gmail.com" type="email"/>
+                  <Pollinput pollText="Email" placeholder="Himanshu.singh@gmail.com" type="email"/>
                   <div className="w-full h-[0.1rem]  bg-zinc-700"></div>
                 {/*Poll Questions*/}
                     <Pollinput pollNumber={PollVariable} />               
@@ -41,4 +47,4 @@ export default function PollCreation(){
           );
         };
         
-        
+    

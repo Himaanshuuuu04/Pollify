@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 const Button = () => {
@@ -56,7 +55,7 @@ const StyledWrapper = styled.div`
     height: 120px;
     width: 100%;
     padding-top: 40px;
-    font-family: "Poppins", sans-serif;
+    font-family: "Product Sans", sans-serif;
     justify-content: center;
   }
 
@@ -65,8 +64,8 @@ const StyledWrapper = styled.div`
     background: #fff;
     border-radius: 50%;
     margin: 10px;
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     font-size: 18px;
     display: flex;
     justify-content: center;
