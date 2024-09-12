@@ -28,7 +28,7 @@ export default function Success(){
                 {/* Success Message */}
                 <div className='border-2  p-8 rounded-lg  border-zinc-700 backdrop-filter backdrop-blur-sm shadow-xl my-7 mt-[-50px] mx-8'>
                 <h1 className="text-2xl md:text-4xl text-white font-semibold tracking-wide">
-                  Your Poll has been submitted successfully
+                  Your Poll has been created successfully
                 </h1>
                 </div>
         

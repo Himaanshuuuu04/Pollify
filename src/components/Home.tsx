@@ -28,9 +28,11 @@ export default function Home() {
             Make an Impact!
           </h2>
           <div className="flex justify-center space-x-6">
+          <Link to="/Polls">
             <button className="text-lg text-center tracking-wider font-bold border-2 border-white text-white py-2 px-6 w-[6.5rem] rounded-[5rem] hover:bg-white hover:text-black transition">
               Cast
             </button>
+            </Link>
             <Link to="/PollCreation">
             <button className="text-lg text-center tracking-wider font-bold border-2 border-white text-white py-2 px-6 rounded-[5rem] w-[6.5rem] hover:bg-white hover:text-black transition">
               Create

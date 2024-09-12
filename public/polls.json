@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1",
+    "question": "What's your favorite programming language?",
+    "options": ["JavaScript", "Python", "Java", "C++"],
+    "votes": [50, 30, 15, 5]
+  },
+  {
+    "id": "2",
+    "question": "What's your favorite food?",
+    "options": ["Pizza", "Burger", "Pasta", "Sushi"],
+    "votes": [40, 25, 20, 15]
+  }
+]

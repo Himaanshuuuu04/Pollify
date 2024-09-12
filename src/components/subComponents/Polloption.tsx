@@ -8,7 +8,7 @@ const PollOption = forwardRef(({ option }, ref) => {
   }));
 
   return (
-    <div>
+    <div className="my-4">
       <label className="block text-gray-100 text-sm">
         {`Option-${option}` || "Option"}
       </label>
@@ -17,7 +17,7 @@ const PollOption = forwardRef(({ option }, ref) => {
         placeholder="Enter the Option"
         value={inputO}
         onChange={(e) => setInput(e.target.value)}
-        className="w-full sm:w-48 md:min-w-48 p-2 bg-zinc-700 text-lg text-white opacity-50 rounded-lg focus:border-2 focus:border-blue-500 hover:opacity-80"
+        className="w-full sm:w-48 md:min-w-48 p-2 bg-zinc-700  text-lg text-white bg-opacity-50 rounded-lg focus:border-2 focus:border-blue-500 hover:bg-opacity-100 "
         required
       />
     </div>

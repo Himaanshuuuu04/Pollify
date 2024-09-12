@@ -1,26 +1,45 @@
-import PollInput from "./subComponents/PollInput";
-import PollOption from "./subComponents/PollOption";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import PollInput from "./subComponents/Pollinput";
+import PollOption from "./subComponents/Polloption";
+import { PollContext } from "./Context/PollContext";
+
+
+interface UserDetails {
+  name: string;
+  mobile: string;
+  email: string;
+}
+
+interface Poll {
+  question: string;
+  options: string[];
+}
 
 export default function PollCreation() {
   const navigate = useNavigate();
+  
+  // Access the context
+  const pollContext = useContext(PollContext);
+  
+  if (!pollContext) {
+    throw new Error("PollContext must be used within a PollProvider");
+  }
+  
+  const { setPollData } = pollContext;
 
-
-  const [userDetails, setUserDetails] = useState({
+  const [userDetails, setUserDetails] = useState<UserDetails>({
     name: "",
     mobile: "",
     email: "",
   });
 
-  
-  const [polls, setPolls] = useState([{ question: "", options: ["", ""] }]);
+  const [polls, setPolls] = useState<Poll[]>([{ question: "", options: ["", ""] }]);
 
-  const questionRefs = useRef([]);
-  const optionRefs = useRef([]);
+  const questionRefs = useRef<(PollInput | null)[]>([]);
+  const optionRefs = useRef<(PollOption | null)[][]>([]);
 
-  
-  const handleUserChange = (e) => {
+  const handleUserChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserDetails((prevDetails) => ({
       ...prevDetails,
@@ -32,11 +51,12 @@ export default function PollCreation() {
     setPolls([...polls, { question: "", options: ["", ""] }]);
   };
 
-  const handleAddOption = (pollIndex) => {
+  const handleAddOption = (pollIndex: number) => {
     const newPolls = [...polls];
     newPolls[pollIndex].options.push(""); 
     setPolls(newPolls);
-  }
+  };
+
   const validateForm = () => {
     const { name, mobile, email } = userDetails;
     
@@ -44,10 +64,11 @@ export default function PollCreation() {
       alert("Please fill out all user details.");
       return false;
     }
-    if(mobile.length!=10){
-        alert("Please enter a valid phone number");
-        return false;
+    if (mobile.length !== 10) {
+      alert("Please enter a valid phone number.");
+      return false;
     }
+
     for (let i = 0; i < polls.length; i++) {
       const question = questionRefs.current[i]?.getValueP() || "";
       const options = optionRefs.current[i]?.map((ref) => ref?.getValueO() || "") || [];
@@ -61,83 +82,68 @@ export default function PollCreation() {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    
     if (validateForm()) {
-      
       const pollData = polls.map((_, pollIndex) => ({
         question: questionRefs.current[pollIndex]?.getValueP() || "",
         options: optionRefs.current[pollIndex]?.map((ref) => ref?.getValueO() || "") || [],
       }));
 
-      
       const finalData = {
         userDetails,
         polls: pollData,
       };
 
-      console.log("Final Data:", finalData);
+      // Save poll data in the context
+      setPollData(finalData);
 
-      
-      navigate("/Success"); 
+      // Redirect to success page
+      navigate("/Success");
     }
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen tracking-wide">
       <div className="w-3/4 mx-[2rem] md:mx-[6rem] my-[3rem] md:my-[4rem] max-w-[100vw] p-10 bg-black bg-opacity-10 rounded-[2rem] border-2 border-zinc-800 backdrop-filter backdrop-blur-sm shadow-xl">
-        {/* Form Title */}
         <h1 className="text-4xl font-bold text-white mb-8">
           <span>Create a New Poll</span>
         </h1>
 
-        {/* Input Fields */}
         <form className="space-y-6" onSubmit={handleSubmit}>
-          {/* Name */}
           <PollInput
             pollText="Name"
             placeholder="Himanshu Singh"
             type="text"
-            value={userDetails.name} 
-            onChange={handleUserChange}  
-            name="name" 
+            value={userDetails.name}
+            onChange={handleUserChange}
+            name="name"
           />
-
-          {/* Mobile No */}
           <PollInput
             pollText="Mobile No."
             placeholder="9818377959"
             type="number"
-            value={userDetails.mobile}  
-            onChange={handleUserChange} 
-            name="mobile" 
+            value={userDetails.mobile}
+            onChange={handleUserChange}
+            name="mobile"
           />
-
-          {/* Email */}
           <PollInput
             pollText="Email"
             placeholder="Himanshu.singh@gmail.com"
             type="email"
-            value={userDetails.email} 
-            onChange={handleUserChange}  
-            name="email"  
+            value={userDetails.email}
+            onChange={handleUserChange}
+            name="email"
           />
-
-          
           {polls.map((poll, pollIndex) => (
             <div key={pollIndex}>
               <div className="w-full h-[0.1rem] bg-zinc-700 my-4"></div>
-
-            
               <PollInput
                 pollNumber={pollIndex + 1}
                 placeholder="Enter poll question"
                 ref={(el) => (questionRefs.current[pollIndex] = el)}
               />
-
-            
               {poll.options.map((_, optionIndex) => (
                 <PollOption
                   key={optionIndex}
@@ -148,8 +154,6 @@ export default function PollCreation() {
                   }}
                 />
               ))}
-
-        
               <button
                 type="button"
                 className="text-xs md:text-sm px-4 py-2 bg-transparent text-white rounded-lg mt-2 border-2 border-zinc-700 hover:bg-white hover:text-black transition-all"
@@ -159,8 +163,6 @@ export default function PollCreation() {
               </button>
             </div>
           ))}
-
-
           <button
             type="button"
             className="text-xs md:text-lg px-4 py-2 bg-transparent text-white rounded-lg mt-4 border-2 border-zinc-700 hover:bg-white hover:text-black transition-all"
@@ -168,8 +170,6 @@ export default function PollCreation() {
           >
             Add Poll Question
           </button>
-
-        
           <div className="flex justify-end mt-4">
             <button
               type="submit"
