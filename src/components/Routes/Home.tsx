@@ -1,4 +1,4 @@
-import Button from "./Social";
+import Button from "../subComponents/Social";
 import { Link } from "react-router-dom";
 
 

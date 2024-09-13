@@ -2,15 +2,15 @@
 import { useEffect } from "react";
 import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion';
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-import Card from "./components/NotFound";
-import Success from "./components/Success";
-import About from "./components/About";
-import PollCreation from "./components/PollCreation";
-import Polls from "./components/Polls";
-import PollSubmitted from "./components/PollSubmitted";
-import PollResults from "./components/Result";
+import Navbar from "./components/subComponents/Navbar";
+import Home from "./components/Routes/Home";
+import Card from "./components/subComponents/NotFound";
+import Success from "./components/subComponents/Success";
+import About from "./components/Routes/About";
+import PollCreation from "./components/Routes/PollCreation";
+import Polls from "./components/Routes/Polls";
+import PollSubmitted from "./components/subComponents/PollSubmitted";
+import PollResults from "./components/Routes/Result";
 import PageTransition from "./components/subComponents/Transition"; 
 
 function AnimatedRoutes() {
