@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function PollResults() {
@@ -6,7 +6,7 @@ export default function PollResults() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch static data from polls.json
+   
     fetch("/polls.json")
       .then((response) => response.json())
       .then((data) => setPolls(data))

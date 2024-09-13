@@ -31,7 +31,7 @@ const Card = () => {
               <div className="screen_out">
                 <div className="screen_out1">
                   <div className="screen">
-                    <span className="notfound_text">Path Not Found ):</span>
+                    <span className="notfound_text">Path not found:(</span>
                   </div>
                 </div>
               </div>
@@ -75,7 +75,7 @@ const StyledWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
 }
 
@@ -335,7 +335,7 @@ const StyledWrapper = styled.div`
   background: linear-gradient(to right, #006c6b 0%, #005857 16.6666666667%, white 16.6666666667%, #fafafa 33.3333333333%, #001b75 33.3333333333%, #001761 50%, #6c6c6c 50%, #626262 66.6666666667%, #929292 66.6666666667%, #888888 83.3333333333%, #3a3a3a 83.3333333333%, #303030 100%);
 }
 
-  */
+  */g
 
 .lines {
   display: flex;

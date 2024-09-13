@@ -1,30 +1,39 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+
+interface Poll {
+  id: string;
+  question: string;
+  options: string[];
+}
+
+type SelectedOptions = Record<string, string>; 
+
 export default function Polls() {
   const navigate = useNavigate();
-  const [polls, setPolls] = useState([]);
-  const [selectedOptions, setSelectedOptions] = useState({});
+  const [polls, setPolls] = useState<Poll[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<SelectedOptions>({});
 
   useEffect(() => {
     fetch("/polls.json")
       .then((response) => response.json())
-      .then((data) => setPolls(data))
+      .then((data: Poll[]) => setPolls(data))
       .catch((error) => console.error("Error fetching polls:", error));
   }, []);
 
-  const handleOptionClick = (pollId, option) => {
-    setSelectedOptions({
-      ...selectedOptions,
+  const handleOptionClick = (pollId: string, option: string) => {
+    setSelectedOptions((prevSelectedOptions) => ({
+      ...prevSelectedOptions,
       [pollId]: option,
-    });
+    }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     
     // Validation to ensure all polls have a selected option
-    const allPollsAnswered = polls.every((poll) => selectedOptions[poll.id]);
+    const allPollsAnswered = polls.every((poll) => !!selectedOptions[poll.id]);
 
     if (!allPollsAnswered) {
       alert("Please make sure all polls have a selected option.");

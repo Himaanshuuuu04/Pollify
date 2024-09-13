@@ -1,10 +1,14 @@
 import { useState, forwardRef, useImperativeHandle } from "react";
 
-const PollOption = forwardRef(({ option }, ref) => {
+interface PollOptionProps {
+  option: string;
+}
+
+const PollOption = forwardRef(({ option }: PollOptionProps, ref) => {
   const [inputO, setInput] = useState("");
 
   useImperativeHandle(ref, () => ({
-    getValueO: () => inputO,  // Exposing this function to the parent
+    getValueO: () => inputO, 
   }));
 
   return (

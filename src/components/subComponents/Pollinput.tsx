@@ -1,14 +1,39 @@
-import { useState, forwardRef, useImperativeHandle } from "react";
+import { useState, forwardRef, useImperativeHandle, ForwardRefRenderFunction } from "react";
 
-const PollInput = forwardRef(({ pollNumber, pollText, placeholder, type, value, onChange, name }, ref) => {
-  const [inputP, setInput] = useState("");
+interface PollInputProps {
+  pollNumber?: number;
+  pollText?: string;
+  placeholder?: string;
+  type?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  name?: string;
+}
+
+interface PollInputRef {
+  getValueP: () => string;
+}
+
+const PollInput: ForwardRefRenderFunction<PollInputRef, PollInputProps> = (
+  {
+    pollNumber,
+    pollText,
+    placeholder,
+    type,
+    value,
+    onChange,
+    name,
+  },
+  ref
+) => {
+  const [inputValue, setInputValue] = useState<string>("");
 
   useImperativeHandle(ref, () => ({
-    getValueP: () => inputP, // Exposing this function to the parent
+    getValueP: () => inputValue,
   }));
 
-  const handleInputChange = (e) => {
-    setInput(e.target.value);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
   };
 
   return (
@@ -19,14 +44,14 @@ const PollInput = forwardRef(({ pollNumber, pollText, placeholder, type, value, 
       <input
         type={type || "text"}
         placeholder={placeholder || "Enter the Question"}
-        value={value !== undefined ? value : inputP} // Use value prop for user details
-        onChange={onChange || handleInputChange} // Use onChange prop for user details
+        value={value !== undefined ? value : inputValue}
+        onChange={onChange || handleInputChange}
         name={name}
-        className="w-full sm:w-64 md:min-w-96 p-2 bg-zinc-700 text-lg text-white opacity-50 rounded-lg focus:border-2 focus:border-blue-500 hover:opacity-80"
+        className="w-full sm:w-64 md:min-w-96 p-2 bg-zinc-700  text-lg text-white bg-opacity-50 rounded-lg focus:border-2 focus:border-blue-500 hover:bg-opacity-100 "
         required
       />
     </div>
   );
-});
+};
 
-export default PollInput;
+export default forwardRef(PollInput);

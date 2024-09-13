@@ -1,9 +1,8 @@
-import { useState, useRef, useContext, FormEvent } from "react";
+import { useState, useRef, useContext, FormEvent, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import PollInput from "./subComponents/Pollinput";
 import PollOption from "./subComponents/Polloption";
 import { PollContext } from "./Context/PollContext";
-
 
 interface UserDetails {
   name: string;
@@ -19,7 +18,7 @@ interface Poll {
 export default function PollCreation() {
   const navigate = useNavigate();
   
-  // Access the context
+
   const pollContext = useContext(PollContext);
   
   if (!pollContext) {
@@ -36,6 +35,7 @@ export default function PollCreation() {
 
   const [polls, setPolls] = useState<Poll[]>([{ question: "", options: ["", ""] }]);
 
+  // Use React.RefObject instead of the component type directly
   const questionRefs = useRef<(PollInput | null)[]>([]);
   const optionRefs = useRef<(PollOption | null)[][]>([]);
 

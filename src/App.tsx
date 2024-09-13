@@ -1,5 +1,5 @@
 // src/App.tsx
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from 'framer-motion';
 import Navbar from "./components/Navbar";
@@ -11,13 +11,13 @@ import PollCreation from "./components/PollCreation";
 import Polls from "./components/Polls";
 import PollSubmitted from "./components/PollSubmitted";
 import PollResults from "./components/Result";
-import PageTransition from "./components/subComponents/Transition"; // Import your transition component
+import PageTransition from "./components/subComponents/Transition"; 
 
 function AnimatedRoutes() {
   const location = useLocation();
 
   useEffect(() => {
-    // Scroll to top of the page on route change
+   
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [location]);
 
