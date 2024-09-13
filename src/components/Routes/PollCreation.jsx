@@ -1,45 +1,33 @@
-import { useState, useRef, useContext, FormEvent, } from "react";
+import { useState, useRef, useContext, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import PollInput from "../subComponents/Pollinput";
 import PollOption from "../subComponents/Polloption";
 import { PollContext } from "../Context/PollContext";
 
-interface UserDetails {
-  name: string;
-  mobile: string;
-  email: string;
-}
-
-interface Poll {
-  question: string;
-  options: string[];
-}
-
 export default function PollCreation() {
   const navigate = useNavigate();
-  
 
+  // Access the context
   const pollContext = useContext(PollContext);
-  
+
   if (!pollContext) {
     throw new Error("PollContext must be used within a PollProvider");
   }
-  
+
   const { setPollData } = pollContext;
 
-  const [userDetails, setUserDetails] = useState<UserDetails>({
+  const [userDetails, setUserDetails] = useState({
     name: "",
     mobile: "",
     email: "",
   });
 
-  const [polls, setPolls] = useState<Poll[]>([{ question: "", options: ["", ""] }]);
+  const [polls, setPolls] = useState([{ question: "", options: ["", ""] }]);
 
-  
-  const questionRefs = useRef<(PollInput | null)[]>([]);
-  const optionRefs = useRef<(PollOption | null)[][]>([]);
+  const questionRefs = useRef([]);
+  const optionRefs = useRef([]);
 
-  const handleUserChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUserChange = (e) => {
     const { name, value } = e.target;
     setUserDetails((prevDetails) => ({
       ...prevDetails,
@@ -51,15 +39,15 @@ export default function PollCreation() {
     setPolls([...polls, { question: "", options: ["", ""] }]);
   };
 
-  const handleAddOption = (pollIndex: number) => {
+  const handleAddOption = (pollIndex) => {
     const newPolls = [...polls];
-    newPolls[pollIndex].options.push(""); 
+    newPolls[pollIndex].options.push("");
     setPolls(newPolls);
   };
 
   const validateForm = () => {
     const { name, mobile, email } = userDetails;
-    
+
     if (!name || !mobile || !email) {
       alert("Please fill out all user details.");
       return false;
@@ -71,9 +59,10 @@ export default function PollCreation() {
 
     for (let i = 0; i < polls.length; i++) {
       const question = questionRefs.current[i]?.getValueP() || "";
-      const options = optionRefs.current[i]?.map((ref) => ref?.getValueO() || "") || [];
+      const options =
+        optionRefs.current[i]?.map((ref) => ref?.getValueO() || "") || [];
 
-      if (!question || options.some(option => !option)) {
+      if (!question || options.some((option) => !option)) {
         alert(`Please fill out all fields for Poll-${i + 1}.`);
         return false;
       }
@@ -82,13 +71,15 @@ export default function PollCreation() {
     return true;
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (validateForm()) {
       const pollData = polls.map((_, pollIndex) => ({
         question: questionRefs.current[pollIndex]?.getValueP() || "",
-        options: optionRefs.current[pollIndex]?.map((ref) => ref?.getValueO() || "") || [],
+        options:
+          optionRefs.current[pollIndex]?.map((ref) => ref?.getValueO() || "") ||
+          [],
       }));
 
       const finalData = {
@@ -149,7 +140,8 @@ export default function PollCreation() {
                   key={optionIndex}
                   option={` ${String.fromCharCode(65 + optionIndex)}`}
                   ref={(el) => {
-                    if (!optionRefs.current[pollIndex]) optionRefs.current[pollIndex] = [];
+                    if (!optionRefs.current[pollIndex])
+                      optionRefs.current[pollIndex] = [];
                     optionRefs.current[pollIndex][optionIndex] = el;
                   }}
                 />
