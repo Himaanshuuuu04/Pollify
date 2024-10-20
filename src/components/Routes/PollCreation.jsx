@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import PollInput from "../subComponents/Pollinput";
 import PollOption from "../subComponents/Polloption";
 import { PollContext } from "../Context/PollContext";
-
+import { databases } from "../../Appwrite/AppWrite";
+import { ID } from "appwrite";
 export default function PollCreation() {
   const navigate = useNavigate();
 
@@ -71,27 +72,47 @@ export default function PollCreation() {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (validateForm()) {
-      const pollData = polls.map((_, pollIndex) => ({
-        question: questionRefs.current[pollIndex]?.getValueP() || "",
-        options:
-          optionRefs.current[pollIndex]?.map((ref) => ref?.getValueO() || "") ||
-          [],
-      }));
-
-      const finalData = {
-        userDetails,
-        polls: pollData,
-      };
-
-      // Save poll data in the context
-      setPollData(finalData);
-
-      // Redirect to success page
-      navigate("/Success");
+      try {
+        // Create a new user document
+        const userDoc = await databases.createDocument(
+          "6713bf65000170eae0d3", // Replace with your database ID
+          "6713c03200175a8b4d8e", // Replace with your User Details collection ID
+          ID.unique(), // Automatically generate a unique ID for the document
+          userDetails // Pass user details object (name, email, mobile)
+        );
+  
+        // Now map through polls and create documents in Polls collection
+        const pollData = polls.map((_, pollIndex) => ({
+          question: questionRefs.current[pollIndex]?.getValueP() || "",
+          options:
+            optionRefs.current[pollIndex]?.map((ref) => ref?.getValueO() || "") ||
+            [],
+        }));
+  
+        for (const poll of pollData) {
+          await databases.createDocument(
+            "6713bf65000170eae0d3", // Replace with your database ID
+            "6713c1420021beabc9b3", // Replace with your Polls collection ID
+            ID.unique(), // Generate a unique ID for the poll document
+            {
+              question: poll.question,
+              user: userDoc.$id,
+              options: poll.options
+               // Store the user document ID for the relationship
+            }
+          );
+        }
+  
+        // Redirect to success page
+        navigate("/Success");
+      } catch (error) {
+        console.error("Error uploading poll data:", error);
+        alert("An error occurred while submitting the poll data.");
+      }
     }
   };
 

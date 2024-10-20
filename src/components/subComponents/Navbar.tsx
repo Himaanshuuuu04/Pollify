@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,36 +25,32 @@ export default function Navbar() {
       {/* Desktop Menu */}
       <ul className="hidden md:flex space-x-9 text-white text-xl absolute right-10 top-10 transition-opacity duration-300 ease-in-out">
         <li>
-          <a
-            href="#About"
+          <Link to="About"
             className="hover:text-gray-400 transition-colors duration-300 ease-in-out"
           >
             About
-          </a>
+          </Link>
         </li>
         <li>
-          <a
-            href="#PollCreation"
+          <Link to="PollCreation"
             className="hover:text-gray-400 transition-colors duration-300 ease-in-out"
           >
             Poll Creation
-          </a>
+            </Link>
         </li>
         <li>
-          <a
-            href="#results"
+          <Link to="results"
             className="hover:text-gray-400 transition-colors duration-300 ease-in-out"
           >
             Results
-          </a>
+            </Link>
         </li>
         <li className="relative group">
-          <a
-            href="#"
+          <Link to="#"
             className="hover:text-gray-400 transition-colors duration-300 ease-in-out"
           >
             Links
-          </a>
+            </Link>
           <ul className="absolute left-0 hidden mt-2 space-y-2 text-white group-hover:block transition-opacity duration-300 ease-in-out opacity-0 group-hover:opacity-100">
             <li>
               <a
@@ -85,7 +82,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <ul
-        className={`fixed inset-0 bg-zinc-700 bg-opacity-80 text-white font-bold text-2xl flex flex-col space-y-6 items-center justify-center transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-0 bg-zinc-950 bg-opacity-70  backdrop-filter backdrop-blur-sm text-white font-bold text-2xl flex flex-col space-y-6 items-center justify-center transition-transform duration-500 ease-in-out ${
           isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
         } md:hidden`}
       >

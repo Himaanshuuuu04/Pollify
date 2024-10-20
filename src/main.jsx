@@ -9,5 +9,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <PollProvider>
       <App />
     </PollProvider>
-  </React.StrictMode>,
+    </React.StrictMode>
 );

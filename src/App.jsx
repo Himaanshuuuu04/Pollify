@@ -12,6 +12,7 @@ import Polls from "./components/Routes/Polls";
 import PollSubmitted from "./components/subComponents/PollSubmitted";
 import PollResults from "./components/Routes/Result";
 import PageTransition from "./components/subComponents/Transition"; 
+import Tempt from "./components/Routes/Tempt";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -33,6 +34,7 @@ function AnimatedRoutes() {
           <Route path="/PollSubmitted" element={<PollSubmitted />} />
           <Route path="/results" element={<PollResults />} />
           <Route path="*" element={<Card />} />
+          <Route path="/Tempt" element={<Tempt/>}/>
         </Routes>
       </PageTransition>
     </AnimatePresence>
