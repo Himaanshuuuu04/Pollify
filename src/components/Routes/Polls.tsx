@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { databases } from "../../Appwrite/AppWrite.js";
-import { ID } from "appwrite"; // Import necessary functions
 
 interface Poll {
   $id: string; // Poll document ID
   question: string;
   options: string[];
-  votes: number[]; // Votes array, one vote count per option
+  vote: number[]; // Votes array, one vote count per option
 }
-
+type databases = any;
 type SelectedOptions = Record<string, number>; // Record pollId to option index
 
 export default function Polls() {
@@ -59,15 +58,15 @@ export default function Polls() {
 
         if (selectedOptionIndex !== undefined) {
           // Increment vote for the selected option
-          const updatedVotes = [...poll.votes];
+          const updatedVotes = [...poll.vote];
           updatedVotes[selectedOptionIndex] += 1;
 
           // Update the poll document with the new votes array
           await databases.updateDocument(
-            "6713bf65000170eae0d3", // Replace with your database ID
-            "6713c1420021beabc9b3", // Replace with your Polls collection ID
+            "6713bf65000170eae0d3", // Database ID
+            "6713c1420021beabc9b3", // Collection ID
             poll.$id,               // Document ID
-            { votes: updatedVotes }  // Update the votes array
+            { vote: updatedVotes }   // Update the votes array
           );
         } else {
           console.error(`No option selected for poll ${poll.$id}`);
@@ -92,7 +91,7 @@ export default function Polls() {
               <div className="flex flex-col space-y-2">
                 {poll.options.map((option, index) => (
                   <div
-                    key={index}
+                    key={`${poll.$id}-${index}`}  // Ensures unique keys
                     onClick={() => handleOptionClick(poll.$id, index)}
                     className={`w-full sm:w-64 md:min-w-96 p-2 bg-zinc-700 text-sm text-white bg-opacity-50 rounded-lg hover:bg-opacity-100 transition-all duration-300 ease-in-out cursor-pointer ${
                       selectedOptions[poll.$id] === index
