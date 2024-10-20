@@ -79,8 +79,8 @@ export default function PollCreation() {
       try {
         // Create a new user document
         const userDoc = await databases.createDocument(
-          "6713bf65000170eae0d3", // Replace with your database ID
-          "6713c03200175a8b4d8e", // Replace with your User Details collection ID
+          import.meta.env.VITE_DATABASE_ID, // Replace with your database ID
+          import.meta.env.VITE_USER_DETAILS_COLLECTION_ID, // Replace with your User Details collection ID
           ID.unique(), // Automatically generate a unique ID for the document
           userDetails // Pass user details object (name, email, mobile)
         );
@@ -95,8 +95,8 @@ export default function PollCreation() {
   
         for (const poll of pollData) {
           await databases.createDocument(
-            "6713bf65000170eae0d3", // Replace with your database ID
-            "6713c1420021beabc9b3", // Replace with your Polls collection ID
+            import.meta.env.VITE_DATABASE_ID, // Replace with your database ID
+            import.meta.env.VITE_POLLS_COLLECTION_ID, // Replace with your Polls collection ID
             ID.unique(), // Generate a unique ID for the poll document
             {
               question: poll.question,
@@ -134,7 +134,7 @@ export default function PollCreation() {
           />
           <PollInput
             pollText="Mobile No."
-            placeholder="9818377959"
+            placeholder="9818377XXX"
             type="number"
             value={userDetails.mobile}
             onChange={handleUserChange}

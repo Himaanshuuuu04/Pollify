@@ -21,8 +21,8 @@ export default function Polls() {
     const fetchPolls = async () => {
       try {
         const response = await databases.listDocuments(
-          "6713bf65000170eae0d3", // Replace with your database ID
-          "6713c1420021beabc9b3"  // Replace with your Polls collection ID
+          import.meta.env.VITE_DATABASE_ID, // Replace with your database ID
+          import.meta.env.VITE_POLLS_COLLECTION_ID // Replace with your Polls collection ID
         );
         setPolls(response.documents as Poll[]); // Typecasting response to Poll[]
       } catch (error) {
@@ -63,8 +63,8 @@ export default function Polls() {
 
           // Update the poll document with the new votes array
           await databases.updateDocument(
-            "6713bf65000170eae0d3", // Database ID
-            "6713c1420021beabc9b3", // Collection ID
+            import.meta.env.VITE_DATABASE_ID, // Database ID
+            import.meta.env.VITE_POLLS_COLLECTION_ID, // Collection ID
             poll.$id,               // Document ID
             { vote: updatedVotes }   // Update the votes array
           );

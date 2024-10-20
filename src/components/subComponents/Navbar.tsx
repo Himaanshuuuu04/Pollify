@@ -45,7 +45,14 @@ export default function Navbar() {
             Results
             </Link>
         </li>
-        <li className="relative group">
+        <li>
+          <Link to="https://linktr.ee/himaansh_uu"
+            className="hover:text-gray-400 transition-colors duration-300 ease-in-out"
+          >
+            Links
+          </Link>
+        </li>
+        {/* <li className="relative group">
           <Link to="#"
             className="hover:text-gray-400 transition-colors duration-300 ease-in-out"
           >
@@ -76,13 +83,13 @@ export default function Navbar() {
                 Link 3
               </a>
             </li>
-          </ul>
-        </li>
+          </ul> */}
+        {/* </li> */}
       </ul>
 
       {/* Mobile Menu */}
       <ul
-        className={`fixed inset-0 bg-zinc-950 bg-opacity-70  backdrop-filter backdrop-blur-sm text-white font-bold text-2xl flex flex-col space-y-6 items-center justify-center transition-transform duration-500 ease-in-out ${
+        className={`fixed inset-0 bg-zinc-950 bg-opacity-70  backdrop-filter backdrop-blur-sm text-white font-bold text-2xl flex flex-col space-y-6 items-center justify-center transition-transform duration-500 ease-in-out  ${
           isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
         } md:hidden`}
       >
@@ -126,7 +133,7 @@ export default function Navbar() {
         </li>
         <li>
           <a
-            href="#links"
+            href="https://linktr.ee/himaansh_uu"
             className="hover:text-gray-400 transition-colors duration-300 ease-in-out"
             onClick={toggleMenu}
           >

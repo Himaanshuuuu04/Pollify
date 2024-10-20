@@ -4,21 +4,23 @@ const Button = () => {
   return (
     <StyledWrapper>
       <ul className="wrapper">
-        <li className="icon facebook">
-          <span className="tooltip">Facebook</span>
-          <a href="http://www.facebook.com">
+      <li className="icon facebook">
+        <span className="tooltip">LinkedIn</span>
+        <a href="https://www.linkedin.com/in/himaansh-uu/">
           <svg
-            viewBox="0 0 320 512"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
             height="1.2em"
             fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
           >
-            <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
-          </svg></a>
-        </li>
+            <path d="M100.28 448H7.4V148.9h92.88zm-46.44-340.4C24.27 107.6 0 83.33 0 53.61A53.61 53.61 0 0 1 53.84 0C83.9 0 108 24.31 108 53.61c0 29.72-24.06 54-54.16 54zm394.8 340.4h-92.88V302.4c0-34.71-12.48-58.41-43.7-58.41-23.83 0-38.01 16.04-44.26 31.49-2.27 5.55-2.84 13.27-2.84 21v151.52h-92.88s1.23-245.93 0-271.1h92.88v38.39c-.18.29-.43.56-.61.85h.61v-.85c12.35-19.04 34.43-46.21 83.73-46.21 61.15 0 106.94 39.83 106.94 125.41V448z" />
+          </svg>
+        </a>
+      </li>
+
         <li className="icon twitter">
           <span className="tooltip">Twitter</span>
-          <a href="http://www.x.com">
+          <a href="https://x.com/Himaansh_uu">
           <svg
             height="1.8em"
             fill="currentColor"
@@ -31,7 +33,7 @@ const Button = () => {
         </li>
         <li className="icon instagram">
           <span className="tooltip">Instagram</span>
-          <a href="http://www.instagram.com">
+          <a href="https://www.instagram.com/himaansh_uu">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="1.2em"
