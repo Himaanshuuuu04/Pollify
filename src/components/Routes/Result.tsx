@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { databases } from "../../Appwrite/AppWrite.js"; // Assuming this is your Appwrite setup
+import { databases } from "../../Appwrite/AppWrite"; // Assuming this is your Appwrite setup
 
 interface Poll {
   $id: string;
@@ -21,7 +21,18 @@ export default function PollResults() {
           import.meta.env.VITE_DATABASE_ID, // Replace with your database ID
           import.meta.env.VITE_POLLS_COLLECTION_ID // Replace with your Polls collection ID
         );
-        setPolls(response.documents as Poll[]); // Typecasting response to Poll[]
+        
+        // Explicitly map and validate response to Poll[]
+        const pollsData = response.documents.map((doc: any) => {
+          return {
+            $id: doc.$id,
+            question: doc.question,
+            options: doc.options,
+            vote: doc.vote,
+          } as Poll;
+        });
+        
+        setPolls(pollsData);
       } catch (error) {
         console.error("Error fetching poll results:", error);
       }

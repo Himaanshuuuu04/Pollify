@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { databases } from "../../Appwrite/AppWrite.js";
+import { databases } from "../../Appwrite/AppWrite.ts";
 
 interface Poll {
   $id: string; // Poll document ID
@@ -8,6 +8,7 @@ interface Poll {
   options: string[];
   vote: number[]; // Votes array, one vote count per option
 }
+
 type databases = any;
 type SelectedOptions = Record<string, number>; // Record pollId to option index
 
@@ -24,7 +25,23 @@ export default function Polls() {
           import.meta.env.VITE_DATABASE_ID, // Replace with your database ID
           import.meta.env.VITE_POLLS_COLLECTION_ID // Replace with your Polls collection ID
         );
-        setPolls(response.documents as Poll[]); // Typecasting response to Poll[]
+        
+        // Ensure the documents match the Poll structure
+        const validPolls = response.documents.map((doc: any) => {
+          if (doc.question && doc.options && doc.vote) {
+            return {
+              $id: doc.$id,
+              question: doc.question,
+              options: doc.options,
+              vote: doc.vote
+            } as Poll;
+          } else {
+            console.error("Invalid poll data:", doc);
+            return null; // Skip invalid poll
+          }
+        }).filter(Boolean); // Remove nulls
+
+        setPolls(validPolls as Poll[]); // Update state with valid polls
       } catch (error) {
         console.error("Error fetching polls:", error);
       }
@@ -40,45 +57,52 @@ export default function Polls() {
     }));
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
 
-    // Validation: Ensure all polls have a selected option
-    const allPollsAnswered = polls.every((poll) => selectedOptions[poll.$id] !== undefined);
+      // Validation: Ensure all polls have a selected option
+      const allPollsAnswered = polls.every((poll) => selectedOptions[poll.$id] !== undefined);
 
-    if (!allPollsAnswered) {
-      alert("Please make sure all polls have a selected option.");
-      return;
-    }
-
-    try {
-      // Update votes in the Appwrite database
-      for (const poll of polls) {
-        const selectedOptionIndex = selectedOptions[poll.$id];
-
-        if (selectedOptionIndex !== undefined) {
-          // Increment vote for the selected option
-          const updatedVotes = [...poll.vote];
-          updatedVotes[selectedOptionIndex] += 1;
-
-          // Update the poll document with the new votes array
-          await databases.updateDocument(
-            import.meta.env.VITE_DATABASE_ID, // Database ID
-            import.meta.env.VITE_POLLS_COLLECTION_ID, // Collection ID
-            poll.$id,               // Document ID
-            { vote: updatedVotes }   // Update the votes array
-          );
-        } else {
-          console.error(`No option selected for poll ${poll.$id}`);
-        }
+      if (!allPollsAnswered) {
+        alert("Please make sure all polls have a selected option.");
+        return;
       }
 
-      // Redirect to the success page
-      navigate("/PollSubmitted");
-    } catch (error) {
-      console.error("Error submitting votes:", error.message || error);
-      alert("An error occurred while submitting your votes.");
-    }
+      try {
+        // Update votes in the Appwrite database
+        for (const poll of polls) {
+          const selectedOptionIndex = selectedOptions[poll.$id];
+      
+          if (selectedOptionIndex !== undefined) {
+            // Increment vote for the selected option
+            const updatedVotes = [...poll.vote];
+            updatedVotes[selectedOptionIndex] += 1;
+      
+            // Update the poll document with the new votes array
+            await databases.updateDocument(
+              import.meta.env.VITE_DATABASE_ID, // Database ID
+              import.meta.env.VITE_POLLS_COLLECTION_ID, // Collection ID
+              poll.$id,               // Document ID
+              { vote: updatedVotes }   // Update the votes array
+            );
+          } else {
+            console.error(`No option selected for poll ${poll.$id}`);
+          }
+        }
+      
+        // Redirect to the success page
+        navigate("/PollSubmitted");
+      } catch (error) {
+        if (error instanceof Error) {
+          // If the error is an instance of Error, we can safely access its message
+          console.error("Error submitting votes:", error.message);
+        } else {
+          // Handle cases where the error is not an instance of Error (if any)
+          console.error("An unknown error occurred:", error);
+        }
+        alert("An error occurred while submitting your votes.");
+      }
+      
   };
 
   return (

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import PollInput from "../subComponents/Pollinput";
 import PollOption from "../subComponents/Polloption";
 import { PollContext } from "../Context/PollContext";
-import { databases } from "../../Appwrite/AppWrite";
+import { databases } from "../../Appwrite/AppWrite.ts";
 import { ID } from "appwrite";
 export default function PollCreation() {
   const navigate = useNavigate();
@@ -134,7 +134,7 @@ export default function PollCreation() {
           />
           <PollInput
             pollText="Mobile No."
-            placeholder="9818377XXX"
+            placeholder="9818377959"
             type="number"
             value={userDetails.mobile}
             onChange={handleUserChange}
