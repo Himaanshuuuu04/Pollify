@@ -13,7 +13,7 @@ Pollify is a web application that allows users to participate in polls and view 
 ## Tech Stack
 - **Frontend**: React, TypeScript, TailwindCSS
 - **Backend**: Appwrite (for database and user management)
-- **Deployment**: Deployed on Vercel.
+- **Deployment**: Deployed on Vercel
 
 ## Installation
 
