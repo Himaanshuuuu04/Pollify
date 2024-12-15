@@ -1,39 +1,30 @@
+<<<<<<< HEAD
 
 
 Here is the documentation written directly to your `README.md` file:
 
 ```markdown
 # Poll Creation App
+=======
+# Pollify Documentation
+>>>>>>> d1b88381a00ffd96d12f83e9f6dd8e71be325f2f
 
-A web application for creating and managing polls. This project includes features for user input, poll creation, and validation.
+## Overview
 
-## Table of Contents
-
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Running the Application](#running-the-application)
-- [File Structure](#file-structure)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Project Overview
-
-The Poll Creation App allows users to create polls with multiple questions and options. Users can also input their details, and the app will validate the form before submission.
+Pollify is a web application that allows users to participate in polls and view real-time poll results. It leverages **Appwrite** for backend services, managing databases, and handling authentication. The frontend is built using **React**, enhanced by modern tools such as React Router for navigation and **TypeScript** for type safety.
 
 ## Features
+- **Poll Creation**: Admins can create polls with multiple options.
+- **Voting System**: Users can select options and submit their votes.
+- **Real-Time Results**: Poll results update live, showing the number of votes per option.
+- **Authentication**: Secure user authentication ensures unique voting.
 
-- User details input (Name, Mobile Number, Email)
-- Dynamic poll and option creation
-- Form validation
-- Context-based state management
-- Responsive UI
+## Tech Stack
+- **Frontend**: React, TypeScript, TailwindCSS
+- **Backend**: Appwrite (for database and user management)
+- **Deployment**: Deployed on Vercel
 
-## Technologies Used
+## Installation
 
 - **React** - Frontend framework
 - **TypeScript** - Static type checking
