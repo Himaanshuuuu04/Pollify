@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Toggle the menu on hamburger click
+  // Toggle the menu on hamburger clickable button
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
