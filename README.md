@@ -20,8 +20,7 @@ Pollify is a dynamic web application designed for seamless poll creation, partic
 
 ---
 
-![Pollify UI](./src/assets/Frame%2015.png)
-![Pollify Mobile Ui](./src/assets/mobile.png)
+![Pollify UI](./src/assets/Frame%2015.png) ![Pollify Mobile Ui](./src/assets/mobile.png)
 
 ---
 
