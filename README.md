@@ -21,8 +21,8 @@ Pollify is a dynamic web application designed for seamless poll creation, partic
 ---
 
 <div style="display: flex; flex-direction: row; align-items: center;">
-    <img src="./src/assets/Frame%2015.png" width="400" />
-    <img src="./src/assets/mobile.png" width="200" />
+    <img src="./src/assets/Frame%2015.png" height="1000" />
+    <img src="./src/assets/mobile.png" height="1000" />
 </div>
 
 ---
