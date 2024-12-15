@@ -1,6 +1,6 @@
 # Pollify Documentation
 
-![Pollify Logo](https://via.placeholder.com/500x150?text=Pollify+App+Logo)
+![Pollify Logo](./src/assets/Logo%20readme.png)
 
 ---
 
@@ -20,7 +20,7 @@ Pollify is a dynamic web application designed for seamless poll creation, partic
 
 ---
 
-![Pollify Workflow](https://via.placeholder.com/800x400?text=Pollify+Workflow)
+![Pollify UI](./src/assets/Frame%2015.png)
 
 ---
 
